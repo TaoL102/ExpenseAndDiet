@@ -41,6 +41,7 @@ public class Receipt {
         result.put("receiptId", receiptId);
         result.put("totalPrice", totalPrice);
         result.put("totalQuantity", totalQuantity);
+        result.put("time", time);
         return result;
     }
     // [END post_to_map]
