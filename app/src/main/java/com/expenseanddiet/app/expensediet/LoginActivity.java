@@ -213,7 +213,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         // Write new user
         writeNewUser(user.getUid(), username, user.getEmail());
 
-        // Go to MainActivity
+        // Go to MainActivity_old
         startActivity(new Intent(LoginActivity.this, ReceiptActivity.class));
         finish();
     }
