@@ -23,9 +23,11 @@
         android:id="@+id/layout_email_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/icon"
+        android:orientation="horizontal"
+        android:background="@drawable/bg_login"
+        android:layout_above="@+id/layout_buttons"
         android:layout_centerHorizontal="true"
-        android:orientation="horizontal">
+        android:layout_marginBottom="12dp">
 
         <EditText
             android:id="@+id/field_email"
@@ -35,7 +37,9 @@
             android:gravity="center_horizontal"
             android:hint="@string/hint_email"
             android:inputType="textEmailAddress"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:layout_marginRight="5dp"
+            tools:ignore="RtlHardcoded" />
 
         <EditText
             android:id="@+id/field_password"
@@ -53,33 +57,39 @@
         android:id="@+id/layout_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_email_password"
-        android:layout_centerHorizontal="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+
+        android:layout_marginBottom="51dp"
+        android:layout_above="@+id/button_sign_in_google"
+        android:layout_alignStart="@+id/layout_email_password">
 
         <Button
             android:id="@+id/button_sign_in"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="@string/sign_in" />
+            android:text="@string/sign_in"
+            tools:background="@drawable/bg_login_all"
+            android:layout_marginRight="5dp"
+            tools:ignore="ButtonStyle,RtlHardcoded" />
 
 
         <Button
             android:id="@+id/button_sign_up"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="@string/sign_up" />
+            android:text="@string/sign_up"
+            android:background="@drawable/bg_login_all"
+            tools:ignore="ButtonStyle" />
 
     </LinearLayout>
-
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/button_sign_in_google"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_buttons"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="66dp" />
+        android:layout_marginBottom="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
