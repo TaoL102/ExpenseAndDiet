@@ -38,5 +38,6 @@
     <string name="username">Mercy Ashley</string>
     <string name="useremail">mer.ashley@gmail.com</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_receipt_detail">ReceiptDetailActivity</string>
 
 </resources>

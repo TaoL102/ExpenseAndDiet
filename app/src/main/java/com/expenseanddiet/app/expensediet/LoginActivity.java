@@ -31,7 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends BaseActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
+public class LoginActivity extends DrawerActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
@@ -50,6 +50,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
@@ -214,7 +216,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         writeNewUser(user.getUid(), username, user.getEmail());
 
         // Go to MainActivity_old
-        startActivity(new Intent(LoginActivity.this, ReceiptActivity.class));
+        startActivity(new Intent(LoginActivity.this, DrawerActivity.class));
         finish();
     }
 

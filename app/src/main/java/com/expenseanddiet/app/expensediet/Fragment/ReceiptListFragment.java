@@ -1,5 +1,6 @@
 package com.expenseanddiet.app.expensediet.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.expenseanddiet.app.expensediet.Models.Receipt;
 import com.expenseanddiet.app.expensediet.R;
+import com.expenseanddiet.app.expensediet.ReceiptDetailActivity;
 import com.expenseanddiet.app.expensediet.ViewHolder.ReceiptViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -78,6 +80,8 @@ public abstract class ReceiptListFragment extends Fragment {
                         /*Intent intent = new Intent(getActivity(), PostDetailActivity.class);
                         intent.putExtra(PostDetailActivity.EXTRA_POST_KEY, postKey);
                         startActivity(intent);*/
+
+                        startActivity(new Intent(getActivity(), ReceiptDetailActivity.class));
                     }
                 });
 
