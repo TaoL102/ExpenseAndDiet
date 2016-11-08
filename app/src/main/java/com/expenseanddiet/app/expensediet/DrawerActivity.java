@@ -10,7 +10,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.expenseanddiet.app.expensediet.Models.Receipt;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class DrawerActivity extends BaseActivity
@@ -59,6 +58,9 @@ public class DrawerActivity extends BaseActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
     }
 
     @Override

@@ -27,10 +27,9 @@
     <string name="hint_password">password</string>
     <string name="hint_email">email</string>
     <string name="sign_in">Sign In</string>
-    <string name="heading_recent">Recent</string>
-    <string name="heading_my_posts">My Posts</string>
-    <string name="heading_my_top_posts">My Top Posts</string>
-    <string name="title_activity_receipt">ReceiptActivity</string>
+    <string name="heading_last_month">LAST MONTH</string>
+    <string name="heading_this_month">THIS MONTH</string>
+    <string name="title_activity_receipt">Receipts</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_main2">Main2Activity</string>
 
@@ -39,5 +38,6 @@
     <string name="useremail">mer.ashley@gmail.com</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_receipt_detail">ReceiptDetailActivity</string>
+    <string name="title_activity_receipt_item">Receipt Detail</string>
 
 </resources>

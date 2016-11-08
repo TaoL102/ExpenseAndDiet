@@ -17,6 +17,7 @@ public class ReceiptViewHolder extends RecyclerView.ViewHolder {
     public TextView dateView;
     public TextView totalPriceView;
     public ImageView vendorView;
+    public String receiptId;
 
 
     public ReceiptViewHolder(View itemView) {
@@ -32,5 +33,6 @@ public class ReceiptViewHolder extends RecyclerView.ViewHolder {
         dateView.setText(new SimpleDateFormat("dd MM yyyy", Locale.getDefault()).format(receipt.time));
         totalPriceView.setText(Double.toString(receipt.totalPrice));
         /*vendorView.setOnClickListener(starClickListener);*/
+        receiptId=receipt.receiptId;
     }
 }

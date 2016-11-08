@@ -12,18 +12,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.expenseanddiet.app.expensediet.Fragment.ReceiptFragment;
-import com.expenseanddiet.app.expensediet.Models.Receipt;
+import com.expenseanddiet.app.expensediet.Fragment.ReceiptItemFragment;
+import com.expenseanddiet.app.expensediet.Models.Item;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ReceiptActivity extends DrawerActivity {
+public class ReceiptItemActivity extends DrawerActivity {
 
-    private static final String TAG = "ReceiptActivity";
+    private static final String TAG = "ReceiptItemActivity";
+    public static final String RECEIPT_ID = "receiptId";
+
     // [START declare_database_ref]
     private DatabaseReference mDatabase;
     // [END declare_database_ref]
@@ -43,13 +44,17 @@ public class ReceiptActivity extends DrawerActivity {
      */
     private ViewPager mViewPager;
 
+    private String receiptId ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // setContentView(R.layout.activity_receipt);
+      //  setContentView(R.layout.activity_receipt_item);
+
+       // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+     //   setSupportActionBar(toolbar);
 
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
-
         //inflate your activity layout here!
         View contentView = inflater.inflate(R.layout.activity_receipt,null, false);
         mDrawer.addView(contentView, 0);
@@ -75,25 +80,28 @@ public class ReceiptActivity extends DrawerActivity {
             }
         });
 
-
         // [START initialize_database_ref]
-
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
         // [END initialize_database_ref]
 
+        // Get receiptId from intent
+        receiptId = getIntent().getStringExtra(RECEIPT_ID);
 
+        if (receiptId == null) {
+            throw new IllegalArgumentException("Must pass RECEIPT_ID");
+        }
 
 
         // Test
-        /*addReceipt(getUid(),
-                "NZCOUNTDOWN0001"+ new Random().nextInt(100000),
-                new Random().nextDouble(),
-                new Random().nextInt(50),
-                new Random().nextDouble(),
-                new Random().nextDouble(),new Random().nextDouble(),new Random().nextDouble(),new Random().nextDouble(),new Random().nextDouble(),new Random().nextDouble(),new Random().nextDouble(),new Random().nextDouble(),new Random().nextDouble(),new Random().nextDouble()
-        );*/
+        /*addReceiptItem(Integer.toString(new Random().nextInt(100000)),
+               receiptId,
+                "TEST PRODUCT NAME",
+                new Random().nextDouble()
+                 );*/
+
     }
+
+
 
 
 
@@ -130,66 +138,31 @@ public class ReceiptActivity extends DrawerActivity {
      * one of the sections/tabs/pages.
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-        private final ReceiptFragment lastMonthFragment=new ReceiptFragment();
-        private final ReceiptFragment thisMonthFragment=new ReceiptFragment();
+        private final ReceiptItemFragment receiptItemFragment=new ReceiptItemFragment();
+private  String receipt_Id;
 
         private final Fragment[] mFragments = new Fragment[] {
-                lastMonthFragment,
-                thisMonthFragment,
-                 };
-        private final String[] mFragmentNames = new String[] {
-                getString(R.string.heading_last_month),
-                getString(R.string.heading_this_month),
+                receiptItemFragment
+        };
+        private String[] mFragmentNames = new String[] {
+
         };
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
-            // get today and clear time of day
-            Calendar cal = Calendar.getInstance();
-            cal.set(Calendar.HOUR_OF_DAY, 0); // ! clear would not reset the hour of day !
-            cal.clear(Calendar.MINUTE);
-            cal.clear(Calendar.SECOND);
-            cal.clear(Calendar.MILLISECOND);
+// Get receiptId from intent
+            receipt_Id=getIntent().getStringExtra(RECEIPT_ID);
+            Log.d(TAG,"ReceiptID:"+receipt_Id);
 
-// get start of the month
-            cal.set(Calendar.DAY_OF_MONTH, 1);
-            long startDate=cal.getTimeInMillis();
+            // Put receipt id to fragment
+            Bundle args=new Bundle();
+            args.putString("receiptId",receipt_Id);
+            receiptItemFragment.setArguments(args);
 
-            cal.set(Calendar.DATE, cal.getActualMaximum(Calendar.DATE));
-            long endDate=cal.getTimeInMillis();
-
-            Log.d(TAG,startDate+","+endDate);
-
-            Bundle thisMonthBundle=new Bundle();
-            thisMonthBundle.putLong("startDate",startDate);
-            thisMonthBundle.putLong("endDate",endDate);
-
-            thisMonthFragment.setArguments(thisMonthBundle);
-
-            // get today and clear time of day
-             cal = Calendar.getInstance();
-            cal.set(Calendar.HOUR_OF_DAY, 0); // ! clear would not reset the hour of day !
-            cal.clear(Calendar.MINUTE);
-            cal.clear(Calendar.SECOND);
-            cal.clear(Calendar.MILLISECOND);
-
-// get start of last month
-            cal.set(Calendar.DAY_OF_MONTH,1);
-            cal.add(Calendar.DATE, -1);
-            endDate=startDate;
-            startDate=cal.getTimeInMillis();
-
-
-
-            Bundle lastMonthBundle=new Bundle();
-            lastMonthBundle.putLong("startDate",startDate);
-            lastMonthBundle.putLong("endDate",endDate);
-            Log.d(TAG,startDate+","+endDate);
-
-            lastMonthFragment.setArguments(lastMonthBundle);
-
-
+            // Initialize fragment name
+            mFragmentNames= new String[] {
+                    receipt_Id
+            };
         }
 
         @Override
@@ -198,7 +171,7 @@ public class ReceiptActivity extends DrawerActivity {
         }
 
         @Override
-        public int getCount() {
+        public int getCount()  {
             return mFragments.length;
         }
 
@@ -206,37 +179,20 @@ public class ReceiptActivity extends DrawerActivity {
         public CharSequence getPageTitle(int position) {
             return mFragmentNames[position];
         }
-
-
     }
 
+
     // [START write_fan_out]
-    private void addReceipt(String uid,
-                            String receiptId,
-                            double totalPrice,
-                            int totalQuantity,
-                            double dairyTotal,
-                            double snacksAndSweetsTotal,
-                            double meatAndPoultryTotal,
-                            double grainsTotal,
-                            double fruitsAndFruitJuiceTotal,
-                            double vegetablesTotal,
-                            double beveragesTotal,
-                            double alcoholTotal,
-                            double proteinTotal,
-                            double fatTotal,
-                            double carbsTotal) {
-        // Create new receipt at /user-posts/$userid/$postid and at
+    private void addReceiptItem( String itemID,String receiptId,String name,double price) {
+        // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
         String key = mDatabase.child("receipts").push().getKey();
-        Receipt receipt = new Receipt(uid, receiptId,totalPrice,totalQuantity,dairyTotal, snacksAndSweetsTotal,
-         meatAndPoultryTotal,grainsTotal,fruitsAndFruitJuiceTotal,vegetablesTotal,beveragesTotal,alcoholTotal, proteinTotal,
-        fatTotal, carbsTotal);
+        Item post = new Item(  itemID, receiptId, name, price);
+        Map<String, Object> postValues = post.toMap();
 
-        Map<String, Object> receiptValues = receipt.toMap();
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/receipts/" + receiptId, receiptValues);
-        childUpdates.put("/user-receipts/" + uid + "/" + receiptId, receiptValues);
+        childUpdates.put("/items/" + itemID, postValues);
+        childUpdates.put("/receipt-items/" + receiptId+ "/" + itemID , postValues);
 
         mDatabase.updateChildren(childUpdates);
     }
