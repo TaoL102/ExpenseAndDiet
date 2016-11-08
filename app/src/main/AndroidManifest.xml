@@ -36,6 +36,14 @@
         <activity
             android:name=".ReceiptItemActivity"
             android:label="@string/title_activity_receipt_item"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ExpenseChartActivity"
+            android:label="@string/title_activity_expense_chart"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NutrientChartActivity"
+            android:label="@string/title_activity_nutrient_chart"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

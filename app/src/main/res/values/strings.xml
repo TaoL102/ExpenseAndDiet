@@ -39,5 +39,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_receipt_detail">ReceiptDetailActivity</string>
     <string name="title_activity_receipt_item">Receipt Detail</string>
+    <string name="title_activity_expense_chart">Expense Chart</string>
+    <string name="title_activity_nutrient_chart">Nutrient Chart</string>
 
 </resources>
