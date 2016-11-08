@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -61,6 +62,17 @@ public class DrawerActivity extends BaseActivity
 
 
 
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+
+        // Get User Info
+
+        if(FirebaseAuth.getInstance().getCurrentUser()!=null){
+        TextView accountEmailView=(TextView)findViewById(R.id.account_email);
+        accountEmailView.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());}
     }
 
     @Override

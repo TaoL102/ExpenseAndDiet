@@ -14,7 +14,18 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity_old" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.expenseanddiet.app.expensediet.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            android:readPermission="com.expenseanddiet.app.expensediet.fileprovider.READ">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
+
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"

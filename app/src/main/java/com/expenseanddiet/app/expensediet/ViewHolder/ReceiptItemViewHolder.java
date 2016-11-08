@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.expenseanddiet.app.expensediet.Models.Item;
+import com.expenseanddiet.app.expensediet.Models.ReceiptItem;
 import com.expenseanddiet.app.expensediet.R;
 
 /**
@@ -29,7 +29,7 @@ public class ReceiptItemViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    public void bindToPost(Item item, View.OnClickListener starClickListener) {
+    public void bindToPost(ReceiptItem item, View.OnClickListener starClickListener) {
         itemNameView.setText(item.name);
         itemPriceView.setText(Double.toString(item.price));
         /*vendorView.setOnClickListener(starClickListener);*/

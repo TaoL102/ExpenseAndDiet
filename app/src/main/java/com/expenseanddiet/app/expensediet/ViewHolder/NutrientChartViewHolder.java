@@ -123,4 +123,12 @@ public class NutrientChartViewHolder extends RecyclerView.ViewHolder {
         //  chartView.setEntryLabelTypeface(mTfRegular);
         chartView.setEntryLabelTextSize(12f);
 
-    }}
+        chartView.setBackgroundColor(Color.WHITE);
+
+    }
+
+
+
+
+
+}

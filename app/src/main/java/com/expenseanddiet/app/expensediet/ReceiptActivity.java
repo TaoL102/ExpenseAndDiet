@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class ReceiptActivity extends DrawerActivity {
 
@@ -86,13 +87,13 @@ public class ReceiptActivity extends DrawerActivity {
 
 
         // Test
-        /*addReceipt(getUid(),
+        addReceipt(getUid(),
                 "NZCOUNTDOWN0001"+ new Random().nextInt(100000),
                 new Random().nextDouble(),
                 new Random().nextInt(50),
                 new Random().nextDouble(),
                 new Random().nextDouble(),new Random().nextDouble(),new Random().nextDouble(),new Random().nextDouble(),new Random().nextDouble(),new Random().nextDouble(),new Random().nextDouble(),new Random().nextDouble(),new Random().nextDouble(),new Random().nextDouble()
-        );*/
+        );
     }
 
 

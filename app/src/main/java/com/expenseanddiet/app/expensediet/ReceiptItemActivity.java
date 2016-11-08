@@ -13,12 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.expenseanddiet.app.expensediet.Fragment.ReceiptItemFragment;
-import com.expenseanddiet.app.expensediet.Models.Item;
+import com.expenseanddiet.app.expensediet.Models.ReceiptItem;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class ReceiptItemActivity extends DrawerActivity {
 
@@ -93,11 +94,11 @@ public class ReceiptItemActivity extends DrawerActivity {
 
 
         // Test
-        /*addReceiptItem(Integer.toString(new Random().nextInt(100000)),
+        addReceiptItem(Integer.toString(new Random().nextInt(100000)),
                receiptId,
                 "TEST PRODUCT NAME",
                 new Random().nextDouble()
-                 );*/
+                 );
 
     }
 
@@ -187,7 +188,7 @@ private  String receipt_Id;
         // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
         String key = mDatabase.child("receipts").push().getKey();
-        Item post = new Item(  itemID, receiptId, name, price);
+        ReceiptItem post = new ReceiptItem(  itemID, receiptId, name, price);
         Map<String, Object> postValues = post.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();

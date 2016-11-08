@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.expenseanddiet.app.expensediet.Models.Item;
+import com.expenseanddiet.app.expensediet.Models.ReceiptItem;
 import com.expenseanddiet.app.expensediet.R;
 import com.expenseanddiet.app.expensediet.ViewHolder.ReceiptItemViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -29,7 +29,7 @@ public abstract class ReceiptItemListFragment extends Fragment{
     private DatabaseReference mDatabase;
     // [END define_database_reference]
 
-    private FirebaseRecyclerAdapter<Item, ReceiptItemViewHolder> mAdapter;
+    private FirebaseRecyclerAdapter<ReceiptItem, ReceiptItemViewHolder> mAdapter;
     private RecyclerView mRecycler;
     private LinearLayoutManager mManager;
 
@@ -63,10 +63,10 @@ public abstract class ReceiptItemListFragment extends Fragment{
 
         // Set up FirebaseRecyclerAdapter with the Query
         Query postsQuery = getQuery(mDatabase);
-        mAdapter = new FirebaseRecyclerAdapter<Item, ReceiptItemViewHolder>(Item.class, R.layout.item_receipt_item,
+        mAdapter = new FirebaseRecyclerAdapter<ReceiptItem, ReceiptItemViewHolder>(ReceiptItem.class, R.layout.item_receipt_item,
                 ReceiptItemViewHolder.class, postsQuery) {
             @Override
-            protected void populateViewHolder(final ReceiptItemViewHolder viewHolder, final Item model, final int position) {
+            protected void populateViewHolder(final ReceiptItemViewHolder viewHolder, final ReceiptItem model, final int position) {
                 final DatabaseReference postRef = getRef(position);
 
                 // Set click listener for the whole post view

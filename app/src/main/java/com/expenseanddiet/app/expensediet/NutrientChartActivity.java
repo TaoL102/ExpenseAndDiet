@@ -1,12 +1,16 @@
 package com.expenseanddiet.app.expensediet;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.FileProvider;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -16,9 +20,13 @@ import android.view.View;
 
 import com.expenseanddiet.app.expensediet.Fragment.NutrientChartFragment;
 import com.expenseanddiet.app.expensediet.Models.NutrientChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,14 +76,7 @@ public class NutrientChartActivity extends DrawerActivity{
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
 
         // [START initialize_database_ref]
 
@@ -84,7 +85,7 @@ public class NutrientChartActivity extends DrawerActivity{
         // [END initialize_database_ref]
 
         // Test
-         addNutrient( "201611",33,55,34 );
+         addNutrient( "201610",33,55,34 );
 
     }
 
@@ -208,4 +209,74 @@ public class NutrientChartActivity extends DrawerActivity{
     }
     // [END write_fan_out]
 
+
+    public void shareBtn_OnClick(View view) {
+
+        // Find
+        PieChart chartView = (PieChart) findViewById(R.id.chart);
+        Bitmap bitmap = chartView.getChartBitmap();
+
+        // Create image
+        File imagePath = new File(getFilesDir(), "images");
+        File newFile = new File(imagePath, "sharePic.jpg");
+        createImage(bitmap,imagePath,newFile);
+
+        // Create intent
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+
+        // Clarify file path. To solve the Gmail "Permission denied for the attachment" issue,
+        // I use FileProvider.getUriForFile() method to grant permissions to the receiving app temporaryly,
+        // which would expire automatically when the receiving app's task stack is finished.
+        // Reference： https://developer.android.com/training/secure-file-sharing/setup-sharing.html
+
+        Uri contentUri = FileProvider.getUriForFile(this, "com.expenseanddiet.app.expensediet.fileprovider", newFile);
+
+        // Set intent
+        shareIntent.setType("image/*");
+        shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+        shareIntent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+        // Call startActivity() method to invoke Chooser panel.
+        startActivity(Intent.createChooser(shareIntent, "Share via"));
+
+    }
+
+    /**
+     * This method is used to create an image in the storage
+     * Reference： https://developer.android.com/training/secure-file-sharing/setup-sharing.html
+     * @return if image is created in the assigned directory
+     */
+    public boolean createImage(Bitmap bitmap,File imagePath,File file) {
+
+        // Make sure the directory exists.
+        imagePath.mkdirs();
+
+        // Save stream to file
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(file);
+            // Create new bitmap based on the size and config of the old
+            Bitmap newBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), bitmap.getConfig());
+// Instantiate a canvas and prepare it to paint to the new bitmap
+            Canvas canvas = new Canvas(newBitmap);
+// Paint it white (or whatever color you want)
+            canvas.drawColor(Color.WHITE);
+// Draw the old bitmap ontop of the new white one
+            canvas.drawBitmap(bitmap, 0, 0, null);
+            newBitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+            // PNG is a lossless format, the compression factor (100) is ignored
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (out != null) {
+                    out.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

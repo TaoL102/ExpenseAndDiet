@@ -12,18 +12,18 @@ import java.util.Map;
 
 // [START post_class]
 @IgnoreExtraProperties
-public class Item {
+public class ReceiptItem {
 
     public String itemID;
     public String receiptId;
     public String name;
     public double price;
 
-    public Item() {
+    public ReceiptItem() {
         // Default constructor required for calls to DataSnapshot.getValue(Post.class)
     }
 
-    public Item(String itemID, String receiptId, String name, double price) {
+    public ReceiptItem(String itemID, String receiptId, String name, double price) {
         this.itemID = itemID;
         this.receiptId = receiptId;
         this.price = price;
