@@ -1,8 +1,6 @@
 package com.expenseanddiet.app.expensediet;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -19,7 +17,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 public class ReceiptItemActivity extends DrawerActivity {
 
@@ -72,14 +69,6 @@ public class ReceiptItemActivity extends DrawerActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         // [START initialize_database_ref]
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -94,11 +83,11 @@ public class ReceiptItemActivity extends DrawerActivity {
 
 
         // Test
-        addReceiptItem(Integer.toString(new Random().nextInt(100000)),
+       /*addReceiptItem(Integer.toString(new Random().nextInt(100000)),
                receiptId,
                 "TEST PRODUCT NAME",
                 new Random().nextDouble()
-                 );
+                 );*/
 
     }
 

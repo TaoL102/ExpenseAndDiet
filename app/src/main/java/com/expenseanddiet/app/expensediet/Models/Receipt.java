@@ -76,7 +76,7 @@ public class Receipt {
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
       //  result.put("uid", uid);
-       // result.put("receiptId", receiptId);
+        result.put("receiptId", receiptId);
         result.put("totalPrice", totalPrice);
         result.put("totalQuantity", totalQuantity);
         result.put("time", time);

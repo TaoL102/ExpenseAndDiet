@@ -4,23 +4,20 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/today_list"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Today's List" />
-        <item
-            android:id="@+id/data_capture"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Data Capture" />
+            android:icon="@drawable/ic_transaction"
+            android:title="Transactions" />
+
         <item
             android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_pie_chart"
             android:title="Expense Chart" />
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_pie_chart"
             android:title="Nutrient Chart" />
         <item
             android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_user"
             android:title="Account" />
     </group>
 

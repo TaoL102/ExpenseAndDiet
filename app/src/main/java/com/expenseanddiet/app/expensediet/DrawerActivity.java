@@ -72,7 +72,11 @@ public class DrawerActivity extends BaseActivity
 
         if(FirebaseAuth.getInstance().getCurrentUser()!=null){
         TextView accountEmailView=(TextView)findViewById(R.id.account_email);
-        accountEmailView.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());}
+        accountEmailView.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+            TextView accountNameView=(TextView)findViewById(R.id.account_name);
+            accountNameView.setText(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+
+        }
     }
 
     @Override
@@ -97,10 +101,7 @@ public class DrawerActivity extends BaseActivity
             // Open Receipt activity
             startActivity(new Intent(this, ReceiptActivity.class));
 
-        } else if (id == R.id.data_capture) {
-
-
-        } else if (id == R.id.nav_gallery) {
+        }else if (id == R.id.nav_gallery) {
             startActivity(new Intent(this, ExpenseChartActivity.class));
         } else if (id == R.id.nav_slideshow) {
             startActivity(new Intent(this,NutrientChartActivity.class));

@@ -1,57 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp">
+
+    <ImageView
+        android:layout_width="match_parent"
+        app:srcCompat="@drawable/countdown_bg"
+        android:id="@+id/imageView3"
+        android:scaleType="centerCrop"
+        android:layout_height="120dp" />
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:padding="10dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_height="120dp">
 
         <ImageView
             android:id="@+id/receipt_vendor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_invoice" />
+            app:srcCompat="@drawable/countdown_logo"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:layout_width="160dp"
+            android:layout_alignLeft="@+id/receipt_date" />
+
+        <TextView
+    android:id="@+id/receipt_total_price"
+    style="@style/Base.TextAppearance.AppCompat.Small"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:text="$ 29.99"
+            android:textColor="@color/buttonTextColor"
+            android:textSize="30sp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginRight="10dp" />
 
         <TextView
             android:id="@+id/receipt_date"
             style="@style/Base.TextAppearance.AppCompat.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:gravity="center_vertical"
-            tools:text="09 OCT 2016" />
-    </LinearLayout>
+            tools:text="09 OCT 2016"
+            android:layout_weight="1"
+            android:textColor="@color/buttonTextColor"
+            android:textSize="20sp"
+            android:layout_alignBottom="@+id/receipt_total_price"
+            android:layout_marginLeft="10dp" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_alignParentRight="true"
-
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_alignParentBottom="false"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentStart="false"
-        android:layout_alignParentTop="false"
-        android:layout_centerVertical="true">>
-    <TextView
-    android:id="@+id/receipt_total_price"
-    style="@style/Base.TextAppearance.AppCompat.Small"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    tools:text="$ 29.99" />
-    </LinearLayout>
+        <TextView
+            android:text="Receipt #"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/receipt_id"
+            android:textColor="@color/buttonTextColor"
+            android:textSize="16sp"
+            android:layout_marginEnd="11dp"
+            android:layout_alignStart="@+id/receipt_date"
+            android:layout_alignParentBottom="true" />
     </RelativeLayout>
+
 </android.support.v7.widget.CardView>

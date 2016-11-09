@@ -31,7 +31,7 @@ public class ReceiptItemViewHolder extends RecyclerView.ViewHolder {
 
     public void bindToPost(ReceiptItem item, View.OnClickListener starClickListener) {
         itemNameView.setText(item.name);
-        itemPriceView.setText(Double.toString(item.price));
+        itemPriceView.setText("$ "+Double.toString(item.price));
         /*vendorView.setOnClickListener(starClickListener);*/
     }
 }

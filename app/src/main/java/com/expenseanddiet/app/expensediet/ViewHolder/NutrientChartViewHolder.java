@@ -59,9 +59,19 @@ public class NutrientChartViewHolder extends RecyclerView.ViewHolder {
         entries.add(new PieEntry((float)item.carbsTotal, "Carbs"));
 
 
-        PieDataSet set = new PieDataSet(entries,item.yearMonth);
-        set.setColors(Color.BLACK, Color.BLUE,Color.GREEN);
+        PieDataSet set = new PieDataSet(entries,"");
+        set.setColors(
+                Color.parseColor("#ACFF59"),
+                Color.parseColor("#0F63AD"),
+                Color.parseColor("#EF8700"),
+                Color.parseColor("#019FE9"),
+                Color.parseColor("#F7C80E"),
+                Color.parseColor("#50B948"),
+                Color.parseColor("#5C2772"),
+                Color.parseColor("#DE0000")
+        );
         PieData data = new PieData(set);
+        data.setValueTextSize(12f);
         chartView.setData(data);
         chartView.invalidate(); // refresh
 
@@ -78,8 +88,6 @@ public class NutrientChartViewHolder extends RecyclerView.ViewHolder {
 
         chartView.setDragDecelerationFrictionCoef(0.95f);
 
-        //  chartView.setCenterTextTypeface(mTfLight);
-        // chartView.setCenterText(generateCenterSpannableText());
 
         chartView.setDrawHoleEnabled(true);
         chartView.setHoleColor(Color.WHITE);
@@ -87,8 +95,8 @@ public class NutrientChartViewHolder extends RecyclerView.ViewHolder {
         chartView.setTransparentCircleColor(Color.WHITE);
         chartView.setTransparentCircleAlpha(110);
 
-        chartView.setHoleRadius(58f);
-        chartView.setTransparentCircleRadius(61f);
+        chartView.setHoleRadius(30f);
+        chartView.setTransparentCircleRadius(40f);
 
         chartView.setDrawCenterText(true);
 
@@ -106,24 +114,26 @@ public class NutrientChartViewHolder extends RecyclerView.ViewHolder {
         //  setData(4, 100);
 
         chartView.animateY(1400, Easing.EasingOption.EaseInOutQuad);
-        // mChart.spin(2000, 0, 360);
+        // chartView.spin(2000, 0, 360);
 
 
         Legend l = chartView.getLegend();
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
         l.setOrientation(Legend.LegendOrientation.VERTICAL);
-        l.setDrawInside(false);
-        l.setXEntrySpace(7f);
+        l.setDrawInside(true);
+        l.setXEntrySpace(0f);
         l.setYEntrySpace(0f);
         l.setYOffset(0f);
+        l.setTextSize(12f);
+        l.setPosition(Legend.LegendPosition.LEFT_OF_CHART);
 
         // entry label styling
-        chartView.setEntryLabelColor(Color.WHITE);
+        chartView.setEntryLabelColor(Color.BLACK);
         //  chartView.setEntryLabelTypeface(mTfRegular);
-        chartView.setEntryLabelTextSize(12f);
-
+        chartView.setEntryLabelTextSize(16f);
         chartView.setBackgroundColor(Color.WHITE);
+
 
     }
 

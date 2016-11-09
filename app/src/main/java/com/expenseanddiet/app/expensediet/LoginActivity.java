@@ -215,8 +215,8 @@ public class LoginActivity extends DrawerActivity implements View.OnClickListene
         // Write new user
         writeNewUser(user.getUid(), username, user.getEmail());
 
-        // Go to MainActivity_old
-        startActivity(new Intent(LoginActivity.this, DrawerActivity.class));
+
+        startActivity(new Intent(LoginActivity.this, ReceiptActivity.class));
         finish();
     }
 
